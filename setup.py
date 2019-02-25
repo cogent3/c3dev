@@ -51,6 +51,7 @@ setup(
         'tqdm'
     ],
     entry_points={
-        'console_scripts': ['cleanup=pyco3dev.cleanup:main'],
+        'console_scripts': ['cleanup=pyco3dev.cleanup:main',
+                            'update_version=pyco3dev.update_version:main'],
     }
 )
