@@ -5,6 +5,7 @@ dependencies:
   - jupyterlab
   - ipykernel
   - nb_conda_kernels
+  - openmpi
   - matplotlib
   - numpy
   - pip
@@ -16,6 +17,7 @@ dependencies:
     - jupyter_nbextensions_configurator
     - jupyter_nbextensions_configurator
     - jupyterlab_code_formatter
+    - mpi4py
     - pandas
     - pytest
     - tqdm
