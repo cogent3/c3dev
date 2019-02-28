@@ -1,0 +1,18 @@
+name: c3dev
+channels:
+  - defaults
+dependencies:
+  - jupyterlab
+  - matplotlib
+  - numpy
+  - pip
+  - python=3.7
+  - readline
+  - scipy
+  - pip:
+    - click
+    - pandas
+    - pytest
+    - tqdm
+    - --editable ../PyCogent3Apps/ 
+    - --editable .
