@@ -3,6 +3,8 @@ channels:
   - defaults
 dependencies:
   - jupyterlab
+  - ipykernel
+  - nb_conda_kernels
   - matplotlib
   - numpy
   - pip
