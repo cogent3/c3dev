@@ -1,5 +1,6 @@
 name: c3dev
 channels:
+  - conda-forge
   - defaults
   - plotly
 dependencies:
