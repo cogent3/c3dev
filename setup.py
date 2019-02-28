@@ -52,6 +52,7 @@ setup(
     ],
     entry_points={
         'console_scripts': ['cleanup=pyco3dev.cleanup:main',
-                            'update_version=pyco3dev.update_version:main'],
+                            'update_version=pyco3dev.update_version:main',
+                            'jlab_start=pyco3dev.jlab:main'],
     }
 )
