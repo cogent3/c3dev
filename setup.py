@@ -48,11 +48,11 @@ setup(
     packages=['pyco3dev'],
     install_requires=[
         'click',
-        'tqdm'
     ],
     entry_points={
         'console_scripts': ['cleanup=pyco3dev.cleanup:main',
                             'update_version=pyco3dev.update_version:main',
-                            'jlab_start=pyco3dev.jlab:main'],
+                            'jlab_start=pyco3dev.jlab:main',
+                            'revert_c=pyco3dev.revert_c:main'],
     }
 )
