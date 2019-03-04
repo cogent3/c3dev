@@ -21,7 +21,6 @@ dependencies:
   - pip:
     - click
     - jupyter_nbextensions_configurator
-    - jupyter_nbextensions_configurator
     - jupyterlab_code_formatter
     - pandas
     - pytest
