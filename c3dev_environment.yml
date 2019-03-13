@@ -23,6 +23,7 @@ dependencies:
     - jupyter_nbextensions_configurator
     - jupyterlab_code_formatter
     - pandas
+    - sphinx
     - pytest
     - tqdm
     - --editable ../PyCogent3Apps/ 
