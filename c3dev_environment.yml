@@ -4,8 +4,10 @@ channels:
   - defaults
   - plotly
 dependencies:
+  - nodejs
   - jupyterlab
   - ipykernel
+  - ipywidgets
   - nb_conda_kernels
   - openmpi
   - mpi4py
