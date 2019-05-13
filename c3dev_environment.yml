@@ -26,6 +26,8 @@ dependencies:
     - jupyterlab_code_formatter
     - pandas
     - sphinx
+    - sphinx_rtd_theme
+    - nbsphinx
     - pytest
     - tqdm
     - --editable ../PyCogent3Apps/ 
