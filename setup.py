@@ -55,6 +55,7 @@ setup(
                             'jlab_start=pyco3dev.jlab:main',
                             'revert_c=pyco3dev.revert_c:main',
                             'check_test_inclusion=pyco3dev.included_tests:main',
-                            'check_test_integrity=pyco3dev.integrity_tests:main']
+                            'check_test_integrity=pyco3dev.integrity_tests:main',
+                            'move_merc=pyco3dev.relocate_mercurial:main']
     }
 )
