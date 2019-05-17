@@ -28,6 +28,8 @@ dependencies:
     - sphinx
     - sphinx_rtd_theme
     - nbsphinx
+    - jupytext
+    - sphinxcontrib-bibtex
     - pytest
     - tqdm
     - --editable ../PyCogent3Apps/ 
