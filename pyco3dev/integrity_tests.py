@@ -1,6 +1,6 @@
 import pathlib
 import click
-
+from difflib import SequenceMatcher
 
 @click.command()
 @click.option('-d', '--test_dir',
@@ -35,18 +35,24 @@ def check_test_file_integrity(filepath):
                 class_indent = cur_indent
                 funct_indent = -1
             if sline.startswith('def'):
-                if cur_indent == 0:
+                if cur_indent == 0 and sline.find('test_') != -1:
                     failed_lines.append('Not in class: ' + sline)
-                elif funct_indent == -1:
-                    if cur_indent <= class_indent or cur_indent != 4:
-                        failed_lines.append('Indentation: ' + sline)
-                    else:
-                        funct_indent = cur_indent
-                elif cur_indent != funct_indent:
+                #elif funct_indent == -1:
+                #    if cur_indent <= class_indent:
+                #        failed_lines.append('Indentation K: ' + sline)
+                #    else:
+                #        funct_indent = cur_indent
+                #elif cur_indent != funct_indent:
+                #    failed_lines.append('Indentation M: ' + sline)
+
+                if cur_indent != 4 and sline.find('test_') != -1:
                     failed_lines.append('Indentation: ' + sline)
 
-                if not ((sline.startswith('def test_') and sline.find('(self):') != -1) or sline.startswith('def setUp(self):')):
-                    failed_lines.append('Crippled: ' + sline)
+                if sline.startswith('def ') and sline.find('_') != -1:
+                    possible_test = sline[4:sline.find('_')]
+                    delta = SequenceMatcher(None, possible_test, 'test').ratio()
+                    if delta < 1.0 and delta > 0.7: # can tweak this
+                        failed_lines.append('Crippled: ' + sline)
 
             if sline.startswith('#') and sline.find('def test_') != -1:
                 failed_lines.append('Commented: ' + sline)
@@ -66,6 +72,8 @@ def check_test_file_integrity(filepath):
 
         for err in failed_lines:
             print(err.rstrip())
+        if len(failed_lines) == 0:
+            print('ok!')
 
 
 if __name__ == '__main__':
