@@ -32,5 +32,6 @@ dependencies:
     - sphinxcontrib-bibtex
     - pytest
     - tqdm
+    - scitrack
     - --editable ../PyCogent3Apps/ 
     - --editable .
