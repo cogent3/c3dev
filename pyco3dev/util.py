@@ -8,12 +8,12 @@ def exec_command(cmnd):
 
     if proc.returncode != 0:
         msg = err
-        sys.stderr.writelines('FAILED: %s\n%s' % (cmnd, msg))
+        sys.stderr.writelines("FAILED: %s\n%s" % (cmnd, msg))
         sys.exit(proc.returncode)
 
     if out is not None:
-        r = out.decode('utf8')
-        click.secho(r, fg='red')
+        r = out.decode("utf8")
+        click.secho(r, fg="red")
     else:
         r = None
 

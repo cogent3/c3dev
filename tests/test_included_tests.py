@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from cogent3.util.unit_test import main, TestCase
+from unittest import main, TestCase
 
 
 def test_no_class_before(self):

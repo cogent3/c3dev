@@ -33,5 +33,6 @@ dependencies:
     - pytest
     - tqdm
     - scitrack
+    - black
     - --editable ../PyCogent3Apps/ 
     - --editable .
