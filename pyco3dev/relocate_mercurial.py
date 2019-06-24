@@ -1,9 +1,11 @@
 #!/usr/bin/env python
-from pathlib import Path
-from os.path import join as path_join, basename
-import click
-import subprocess
 import shutil
+import subprocess
+from os.path import basename
+from os.path import join as path_join
+from pathlib import Path
+
+import click
 
 
 @click.command()

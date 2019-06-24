@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-from os import path
 import os
-import click
+from os import path
 
+import click
 
 __author__ = "Daniel McDonald"
 __copyright__ = "Copyright 2007-2019, The Cogent Project"

@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
-import click, subprocess, os, shutil
+import os
+import shutil
+import subprocess
+
+import click
 
 
 @click.command()

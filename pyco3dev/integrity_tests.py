@@ -1,6 +1,7 @@
 import pathlib
-import click
 from difflib import SequenceMatcher
+
+import click
 
 
 @click.command()
