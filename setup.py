@@ -56,6 +56,7 @@ setup(
                             'revert_c=pyco3dev.revert_c:main',
                             'check_test_inclusion=pyco3dev.included_tests:main',
                             'check_test_integrity=pyco3dev.integrity_tests:main',
-                            'move_merc=pyco3dev.relocate_mercurial:main']
+                            'move_merc=pyco3dev.relocate_mercurial:main',
+                            "pyco3_config=pyco3dev.devconfig:main"]
     }
 )
