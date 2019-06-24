@@ -36,11 +36,12 @@ def mercurial_config(path, settings):
 
 @click.command()
 @click.argument("root_dir", type=click.Path(exists=True))
-def main(root_dir):
+@click.option("-sj", "--skip_jupyter", is_flag=True, help="skip jupyter config")
+def main(root_dir, skip_jupyter):
     """installs jupyter plotly extensions, then configures mercurial"""
     root_dir = pathlib.Path(root_dir)
-
-    config_jupyter_plotly()
+    if not skip_jupyter:
+        config_jupyter_plotly()
 
     # precommit hooks for pyco3dev hgrc
     hg_pyco3 = {"hooks": {}}
