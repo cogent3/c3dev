@@ -32,7 +32,10 @@ dependencies:
     - sphinxcontrib-bibtex
     - pytest
     - tqdm
+    - tox
     - scitrack
     - black
+    - isort
+    - tinydb
     - --editable ../PyCogent3Apps/ 
     - --editable .
