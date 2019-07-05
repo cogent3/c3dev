@@ -9,10 +9,10 @@ from .util import exec_command
 def config_jupyter_plotly():
     environ = "NODE_OPTIONS=--max-old-space-size=4096"
     installs = [
-        "@jupyter-widgets/jupyterlab-manager@0.38",
-        "plotlywidget@0.8.0 --no-build",
-        "@jupyterlab/plotly-extension@0.18.2",
-        "jupyterlab-chart-editor@1.0",
+        "@jupyter-widgets/jupyterlab-manager",
+        "plotlywidget",
+        "@jupyterlab/plotly-extension",
+        "jupyterlab-chart-editor",
     ]
     for install in installs:
         cmnd = f"{environ} jupyter labextension install {install}  --no-build"
