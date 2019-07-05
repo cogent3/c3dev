@@ -1,3 +1,4 @@
+import sys
 from subprocess import PIPE, Popen
 
 import click
