@@ -53,9 +53,9 @@ def main(root_dir, skip_jupyter):
 
     # precommit hooks for cogent3 hgrc
     cogent3 = {"hooks": {}}
-    cogent3["hooks"]["pre-push"] = "./run_tests"
-    cogent3["hooks"]["precommit.black"] = "black cogent3/ tests/"
-    cogent3["hooks"]["precommit.isort"] = "isort -rc cogent3/ tests/"
+    cogent3["hooks"]["pre-push"] = "tox -e py37"
+    cogent3["hooks"]["precommit.black"] = "black src/cogent3/ tests/"
+    cogent3["hooks"]["precommit.isort"] = "isort -rc src/cogent3/ tests/"
     cogent3path = root_dir / "PyCogent3Apps/.hg/hgrc"
     mercurial_config(str(cogent3path), cogent3)
 
