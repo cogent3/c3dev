@@ -27,6 +27,7 @@ dependencies:
     - pandas
     - sphinx
     - sphinx_rtd_theme
+    - sphinx-autobuild
     - nbsphinx
     - jupytext
     - sphinxcontrib-bibtex
