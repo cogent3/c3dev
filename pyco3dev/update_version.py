@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import glob
 import os
 from os import path
 
@@ -34,10 +35,10 @@ class VersionUpdater(object):
         self.verbose = verbose
         self.mock_run = mock_run
 
-        self.codes_directory = path.join(self.rootdir, "cogent3")
+        self.codes_directory = path.join(self.rootdir, "src/cogent3")
         self.tests_directory = path.join(self.rootdir, "tests")
         self.doc_directory = path.join(self.rootdir, "doc")
-        self.includes_directory = path.join(self.rootdir, "include")
+        self.includes_directory = path.join(self.rootdir, "src/include")
 
         if not os.access(path.join(self.codes_directory, "__init__.py"), os.R_OK):
             raise IOError("Could not locate cogent3/__init__.py")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from unittest import main, TestCase
+from unittest import TestCase, main
 
 
 def test_no_class_before(self):
@@ -55,4 +55,3 @@ def test_no_class_after(self):
 
 if __name__ == '__main__':
     main()
-
