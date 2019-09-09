@@ -17,16 +17,16 @@ if sys.version_info < (3, 6):
     raise RuntimeError(
         "Python-3.5 or greater is required, Python-%s used." % py_version)
 
-short_description = "pyco3dev"
+short_description = "c3dev"
 
 # This ends up displayed by the installer
-long_description = """pyco3dev
+long_description = """c3dev
 tools to assist in development of PyCogent3
 Version %s.
 """ % __version__
 
 setup(
-    name="pyco3dev",
+    name="c3dev",
     version=__version__,
     author="Gavin Huttley",
     author_email="gavin.huttley@anu.edu.au",
@@ -45,18 +45,18 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Operating System :: OS Independent",
     ],
-    packages=['pyco3dev'],
+    packages=['c3dev'],
     install_requires=[
         'click',
     ],
     entry_points={
-        'console_scripts': ['cleanup=pyco3dev.cleanup:main',
-                            'update_version=pyco3dev.update_version:main',
-                            'jlab_start=pyco3dev.jlab:main',
-                            'revert_c=pyco3dev.revert_c:main',
-                            'check_test_inclusion=pyco3dev.included_tests:main',
-                            'check_test_integrity=pyco3dev.integrity_tests:main',
-                            'move_merc=pyco3dev.relocate_mercurial:main',
-                            "pyco3_config=pyco3dev.devconfig:main"]
+        'console_scripts': ['cleanup=c3dev.cleanup:main',
+                            'update_version=c3dev.update_version:main',
+                            'jlab_start=c3dev.jlab:main',
+                            'revert_c=c3dev.revert_c:main',
+                            'check_test_inclusion=c3dev.included_tests:main',
+                            'check_test_integrity=c3dev.integrity_tests:main',
+                            'move_merc=c3dev.relocate_mercurial:main',
+                            "pyco3_config=c3dev.devconfig:main"]
     }
 )

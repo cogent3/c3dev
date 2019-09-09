@@ -43,11 +43,11 @@ def main(root_dir, skip_jupyter):
     if not skip_jupyter:
         config_jupyter_plotly()
 
-    # precommit hooks for pyco3dev hgrc
+    # precommit hooks for c3dev hgrc
     hg_pyco3 = {"hooks": {}}
-    hg_pyco3["hooks"]["precommit.black"] = "black pyco3dev/"
-    hg_pyco3["hooks"]["precommit.isort"] = "isort -rc pyco3dev/"
-    pyco_path = root_dir / "pyco3dev/.hg/hgrc"
+    hg_pyco3["hooks"]["precommit.black"] = "black c3dev/"
+    hg_pyco3["hooks"]["precommit.isort"] = "isort -rc c3dev/"
+    pyco_path = root_dir / "c3dev/.hg/hgrc"
     assert pyco_path.exists()
     mercurial_config(str(pyco_path), hg_pyco3)
 
