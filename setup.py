@@ -15,7 +15,7 @@ __status__ = "Alpha"
 if sys.version_info < (3, 6):
     py_version = ".".join([str(n) for n in sys.version_info])
     raise RuntimeError(
-        "Python-3.5 or greater is required, Python-%s used." % py_version)
+        "Python-3.6 or greater is required, Python-%s used." % py_version)
 
 short_description = "c3dev"
 
@@ -57,6 +57,6 @@ setup(
                             'check_test_inclusion=c3dev.included_tests:main',
                             'check_test_integrity=c3dev.integrity_tests:main',
                             'move_merc=c3dev.relocate_mercurial:main',
-                            "pyco3_config=c3dev.devconfig:main"]
+                            "c3dev_config=c3dev.devconfig:main"]
     }
 )
