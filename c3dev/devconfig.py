@@ -40,8 +40,8 @@ def write_config(path, settings):
 @click.option("-sj", "--skip_jupyter", is_flag=True, help="skip jupyter config")
 def main(c3dev_dir, cogent3_dir, skip_jupyter):
     """installs jupyter plotly extensions, then configures mercurial"""
-    c3dev_path = pathlib.Path(c3dev_dir)
-    cogent3_path = pathlib.Path(cogent3_dir)
+    c3dev_path = pathlib.Path(c3dev_dir).resolve()
+    cogent3_path = pathlib.Path(cogent3_dir).resolve()
     if not skip_jupyter:
         config_jupyter_plotly()
 
@@ -59,8 +59,8 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
         pyco3_pre_commit = c3dev_path / ".git/hooks/pre-commit"
         f = open(pyco3_pre_commit, "w")
         f.writelines([
-            "#!/bin/bash",
-            "black " + c3dev_path.name,
+            "#!/bin/bash\n",
+            "black " + c3dev_path.name + "\n",
             "isort -rc " + c3dev_path.name,
         ])
         f.close()
@@ -79,7 +79,7 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
         cogent3_pre_push = cogent3_path / ".git/hooks/pre-push"
         f = open(cogent3_pre_push, "w")
         f.writelines([
-            "#!/bin/bash",
+            "#!/bin/bash\n",
             "tox -e py37",
         ])
         f.close()
@@ -87,8 +87,8 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
         cogent3_pre_commit = cogent3_path / ".git/hooks/pre-commit"
         f = open(cogent3_pre_commit, "w")
         f.writelines([
-            "#!/bin/bash",
-            "black tests src/" + cogent3_path.name,
+            "#!/bin/bash\n",
+            "black tests src/" + cogent3_path.name + "\n",
             "isort -rc tests src/" + cogent3_path.name,
         ])
         f.close()
