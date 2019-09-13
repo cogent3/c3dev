@@ -3,7 +3,7 @@ import pathlib
 
 import click
 
-from util import exec_command
+from .util import exec_command
 
 
 def config_jupyter_plotly():
