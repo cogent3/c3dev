@@ -3,7 +3,7 @@ import pathlib
 
 import click
 
-from .util import exec_command
+from util import exec_command
 
 
 def config_jupyter_plotly():
@@ -35,46 +35,48 @@ def write_config(path, settings):
 
 
 @click.command()
-@click.argument("root_dir", type=click.Path(exists=True))
+@click.argument("c3dev_dir", type=click.Path(exists=True))
+@click.argument("cogent3_dir", type=click.Path(exists=True))
 @click.option("-sj", "--skip_jupyter", is_flag=True, help="skip jupyter config")
-def main(root_dir, skip_jupyter):
+def main(c3dev_dir, cogent3_dir, skip_jupyter):
     """installs jupyter plotly extensions, then configures mercurial"""
-    root_dir = pathlib.Path(root_dir)
+    c3dev_path = pathlib.Path(c3dev_dir)
+    cogent3_path = pathlib.Path(cogent3_dir)
     if not skip_jupyter:
         config_jupyter_plotly()
 
-    if pathlib.Path(root_dir / "c3dev/.hg").exists():
+    if (c3dev_path / ".hg").exists():
         # precommit hooks for c3dev hgrc
         hg_pyco3 = {"hooks": {}}
-        hg_pyco3["hooks"]["precommit.black"] = "black c3dev/"
-        hg_pyco3["hooks"]["precommit.isort"] = "isort -rc c3dev/"
-        pyco_path = root_dir / "c3dev/.hg/hgrc"
+        hg_pyco3["hooks"]["precommit.black"] = "black " + c3dev_path.name
+        hg_pyco3["hooks"]["precommit.isort"] = "isort -rc " + c3dev_path.name
+        pyco_path = c3dev_dir / ".hg/hgrc"
         assert pyco_path.exists()
         write_config(str(pyco_path), hg_pyco3)
 
-    if pathlib.Path(root_dir / "c3dev/.git").exists():
+    if (c3dev_path / ".git").exists():
         # precommit hooks for c3dev git config
-        pyco3_pre_commit = root_dir / "c3dev/.git/hooks/pre-commit"
+        pyco3_pre_commit = c3dev_path / ".git/hooks/pre-commit"
         f = open(pyco3_pre_commit, "w")
         f.writelines([
             "#!/bin/bash",
-            "black c3dev/",
-            "isort -rc c3dev/",
+            "black " + c3dev_path.name,
+            "isort -rc " + c3dev_path.name,
         ])
         f.close()
 
-    if pathlib.Path(root_dir / "PyCogent3Apps/.hg").exists():
+    if (cogent3_path / ".hg").exists():
         # precommit hooks for cogent3 hgrc
         cogent3 = {"hooks": {}}
         cogent3["hooks"]["pre-push"] = "tox -e py37"
-        cogent3["hooks"]["precommit.black"] = "black src/cogent3/ tests/"
-        cogent3["hooks"]["precommit.isort"] = "isort -rc src/cogent3/ tests/"
-        cogent3path = root_dir / "PyCogent3Apps/.hg/hgrc"
+        cogent3["hooks"]["precommit.black"] = "black tests src/" + cogent3_path.name
+        cogent3["hooks"]["precommit.isort"] = "isort -rc tests src/" + cogent3_path.name
+        cogent3path = cogent3_path / ".hg/hgrc"
         write_config(str(cogent3path), cogent3)
 
-    if pathlib.Path(root_dir / "PyCogent3Apps/.git").exists():
+    if pathlib.Path(cogent3_path / ".git").exists():
         # prepush hooks for c3dev git config
-        cogent3_pre_push = root_dir / "PyCogent3Apps/.git/hooks/pre-push"
+        cogent3_pre_push = cogent3_path / ".git/hooks/pre-push"
         f = open(cogent3_pre_push, "w")
         f.writelines([
             "#!/bin/bash",
@@ -82,12 +84,12 @@ def main(root_dir, skip_jupyter):
         ])
         f.close()
         # precommit hooks for c3dev git config
-        cogent3_pre_commit = root_dir / "PyCogent3Apps/.git/hooks/pre-commit"
+        cogent3_pre_commit = cogent3_path / ".git/hooks/pre-commit"
         f = open(cogent3_pre_commit, "w")
         f.writelines([
             "#!/bin/bash",
-            "black src/cogent3 tests/",
-            "isort -rc src/cogent3/ tests/",
+            "black tests src/" + cogent3_path.name,
+            "isort -rc tests src/" + cogent3_path.name,
         ])
         f.close()
 
