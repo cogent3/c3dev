@@ -57,6 +57,6 @@ setup(
                             'check_test_inclusion=c3dev.included_tests:main',
                             'check_test_integrity=c3dev.integrity_tests:main',
                             'move_merc=c3dev.relocate_mercurial:main',
-                            "pyco3_config=c3dev.devconfig:main"]
+                            "co3_config=c3dev.devconfig:main"]
     }
 )
