@@ -39,7 +39,8 @@ def write_config(path, settings):
 @click.argument("cogent3_dir", type=click.Path(exists=True))
 @click.option("-sj", "--skip_jupyter", is_flag=True, help="skip jupyter config")
 def main(c3dev_dir, cogent3_dir, skip_jupyter):
-    """installs jupyter plotly extensions, then configures mercurial"""
+    """installs jupyter plotly extensions, then configures mercurial.
+       Warning: overwrites .git pre-commit and pre-push hooks"""
     c3dev_path = pathlib.Path(c3dev_dir).resolve()
     cogent3_path = pathlib.Path(cogent3_dir).resolve()
     if not skip_jupyter:
@@ -58,11 +59,13 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
         # precommit hooks for c3dev git config
         pyco3_pre_commit = c3dev_path / ".git/hooks/pre-commit"
         f = open(pyco3_pre_commit, "w")
-        f.writelines([
-            "#!/bin/bash\n",
-            "black " + c3dev_path.name + "\n",
-            "isort -rc " + c3dev_path.name,
-        ])
+        f.writelines(
+            [
+                "#!/bin/bash\n",
+                "black " + c3dev_path.name + "\n",
+                "isort -rc " + c3dev_path.name,
+            ]
+        )
         f.close()
         exec_command("chmod +x " + str(pyco3_pre_commit.absolute()))
 
@@ -79,24 +82,22 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
         # prepush hooks for c3dev git config
         cogent3_pre_push = cogent3_path / ".git/hooks/pre-push"
         f = open(cogent3_pre_push, "w")
-        f.writelines([
-            "#!/bin/bash\n",
-            "tox -e py37",
-        ])
+        f.writelines(["#!/bin/bash\n", "tox -e py37"])
         f.close()
         exec_command("chmod +x " + str(cogent3_pre_push.absolute()))
 
         # precommit hooks for c3dev git config
         cogent3_pre_commit = cogent3_path / ".git/hooks/pre-commit"
         f = open(cogent3_pre_commit, "w")
-        f.writelines([
-            "#!/bin/bash\n",
-            "black tests src/" + cogent3_path.name + "\n",
-            "isort -rc tests src/" + cogent3_path.name,
-        ])
+        f.writelines(
+            [
+                "#!/bin/bash\n",
+                "black tests src/" + cogent3_path.name + "\n",
+                "isort -rc tests src/" + cogent3_path.name,
+            ]
+        )
         f.close()
         exec_command("chmod +x " + str(cogent3_pre_commit.absolute()))
-
 
 
 if __name__ == "__main__":
