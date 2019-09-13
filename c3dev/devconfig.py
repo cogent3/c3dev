@@ -64,6 +64,7 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
             "isort -rc " + c3dev_path.name,
         ])
         f.close()
+        exec_command("chmod +x " + str(pyco3_pre_commit.absolute()))
 
     if (cogent3_path / ".hg").exists():
         # precommit hooks for cogent3 hgrc
@@ -83,6 +84,8 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
             "tox -e py37",
         ])
         f.close()
+        exec_command("chmod +x " + str(cogent3_pre_push.absolute()))
+
         # precommit hooks for c3dev git config
         cogent3_pre_commit = cogent3_path / ".git/hooks/pre-commit"
         f = open(cogent3_pre_commit, "w")
@@ -92,6 +95,8 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
             "isort -rc tests src/" + cogent3_path.name,
         ])
         f.close()
+        exec_command("chmod +x " + str(cogent3_pre_commit.absolute()))
+
 
 
 if __name__ == "__main__":
