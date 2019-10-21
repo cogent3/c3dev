@@ -11,7 +11,7 @@ def config_jupyter_plotly():
     installs = [
         "@jupyter-widgets/jupyterlab-manager",
         "plotlywidget",
-        "@jupyterlab/plotly-extension",
+        "jupyterlab-plotly",
         "jupyterlab-chart-editor",
     ]
     for install in installs:
