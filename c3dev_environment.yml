@@ -38,5 +38,5 @@ dependencies:
     - black
     - isort
     - tinydb
-    - --editable ../PyCogent3Apps/ 
+    - --editable ../Cogent3Dev/ 
     - --editable .
