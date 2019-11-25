@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-from setuptools import setup
 import sys
+
+from setuptools import setup
 
 __author__ = "Gavin Huttley"
 __copyright__ = "Copyright 2019, Gavin Huttley"
@@ -15,15 +16,19 @@ __status__ = "Alpha"
 if sys.version_info < (3, 6):
     py_version = ".".join([str(n) for n in sys.version_info])
     raise RuntimeError(
-        "Python-3.6 or greater is required, Python-%s used." % py_version)
+        "Python-3.6 or greater is required, Python-%s used." % py_version
+    )
 
 short_description = "c3dev"
 
 # This ends up displayed by the installer
-long_description = """c3dev
+long_description = (
+    """c3dev
 tools to assist in development of PyCogent3
 Version %s.
-""" % __version__
+"""
+    % __version__
+)
 
 setup(
     name="c3dev",
@@ -34,8 +39,14 @@ setup(
     long_description=long_description,
     platforms=["any"],
     license=[__license__],
-    keywords=["biology", "genomics", "genetics", "statistics", "evolution",
-              "bioinformatics"],
+    keywords=[
+        "biology",
+        "genomics",
+        "genetics",
+        "statistics",
+        "evolution",
+        "bioinformatics",
+    ],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Science/Research",
@@ -45,18 +56,18 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Operating System :: OS Independent",
     ],
-    packages=['c3dev'],
-    install_requires=[
-        'click',
-    ],
+    packages=["c3dev"],
+    install_requires=["click",],
     entry_points={
-        'console_scripts': ['cleanup=c3dev.cleanup:main',
-                            'update_version=c3dev.update_version:main',
-                            'jlab_start=c3dev.jlab:main',
-                            'revert_c=c3dev.revert_c:main',
-                            'check_test_inclusion=c3dev.included_tests:main',
-                            'check_test_integrity=c3dev.integrity_tests:main',
-                            'move_merc=c3dev.relocate_mercurial:main',
-                            "c3dev_config=c3dev.devconfig:main"]
-    }
+        "console_scripts": [
+            "cleanup=c3dev.cleanup:main",
+            "update_version=c3dev.update_version:main",
+            "jlab_start=c3dev.jlab:main",
+            "revert_c=c3dev.revert_c:main",
+            "check_test_inclusion=c3dev.included_tests:main",
+            "check_test_integrity=c3dev.integrity_tests:main",
+            "move_merc=c3dev.relocate_mercurial:main",
+            "c3dev_config=c3dev.devconfig:main",
+        ]
+    },
 )
