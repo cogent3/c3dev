@@ -8,7 +8,10 @@ from .util import exec_command
 
 
 def config_jupyter_plotly():
-    environ = "NODE_OPTIONS=--max-old-space-size=4096"
+    if not sys.platform == "win32":
+        environ = "NODE_OPTIONS=--max-old-space-size=4096"
+    else:
+        environ = ""
     installs = [
         "@jupyter-widgets/jupyterlab-manager",
         "plotlywidget",
