@@ -9,8 +9,7 @@ def exec_command(cmnd):
     out, err = proc.communicate()
 
     if proc.returncode != 0:
-        msg = err
-        sys.stderr.writelines("FAILED: %s\n%s" % (cmnd, msg))
+        sys.stderr.writelines(f"FAILED: {cmnd}\n{out}\n{err}")
         sys.exit(proc.returncode)
 
     if out is not None:

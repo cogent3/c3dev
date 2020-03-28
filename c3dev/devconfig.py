@@ -13,7 +13,7 @@ def config_jupyter_plotly():
         "@jupyter-widgets/jupyterlab-manager",
         "plotlywidget",
         "jupyterlab-plotly",
-        "jupyterlab-chart-editor",
+        # "jupyterlab-chart-editor",
     ]
     for install in installs:
         cmnd = f"{environ} jupyter labextension install {install}  --no-build"
@@ -52,7 +52,7 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
         hg_pyco3 = {"hooks": {}}
         hg_pyco3["hooks"]["precommit.black"] = "black " + c3dev_path.name
         hg_pyco3["hooks"]["precommit.isort"] = "isort -rc " + c3dev_path.name
-        pyco_path = c3dev_dir / ".hg/hgrc"
+        pyco_path = c3dev_path / ".hg/hgrc"
         assert pyco_path.exists()
         write_config(str(pyco_path), hg_pyco3)
 
