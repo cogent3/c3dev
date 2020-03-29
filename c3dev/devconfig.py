@@ -80,6 +80,7 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
         cogent3["hooks"]["pre-push"] = "tox -e py37"
         cogent3["hooks"]["precommit.black"] = "black tests/ src/"
         cogent3["hooks"]["precommit.isort"] = "isort -rc tests/ src/"
+        cogent3["hooks"]["pre-push.bookmark"] = "hg bookmark -fr default develop"
         cogent3path = cogent3_path / ".hg/hgrc"
         write_config(str(cogent3path), cogent3)
 
