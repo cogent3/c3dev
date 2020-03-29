@@ -75,8 +75,8 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
         # precommit hooks for cogent3 hgrc
         cogent3 = {"hooks": {}}
         cogent3["hooks"]["pre-push"] = "tox -e py37"
-        cogent3["hooks"]["precommit.black"] = "black tests src/" + cogent3_path.name
-        cogent3["hooks"]["precommit.isort"] = "isort -rc tests src/" + cogent3_path.name
+        cogent3["hooks"]["precommit.black"] = "black tests/ src/"
+        cogent3["hooks"]["precommit.isort"] = "isort -rc tests/ src/"
         cogent3path = cogent3_path / ".hg/hgrc"
         write_config(str(cogent3path), cogent3)
 
@@ -95,8 +95,8 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
         f.writelines(
             [
                 "#!/bin/bash\n",
-                "black tests src/" + cogent3_path.name + "\n",
-                "isort -rc tests src/" + cogent3_path.name,
+                "black tests/ src/\n",
+                "isort -rc tests/ src/\n",
             ]
         )
         f.close()
