@@ -1,19 +1,23 @@
 name: c3dev
 channels:
+  - plotly
   - conda-forge
   - defaults
-  - plotly
 dependencies:
-  - nodejs
-  - nb_conda_kernels
-  - openmpi
+  - matplotlib
   - mpi4py
+  - nb_conda_kernels
+  - nodejs
+  - openmpi
+  - pillow
   - pip
+  - plotly-orca
+  - psutil
   - python>=3.7
   - readline
   - scipy
-  - plotly-orca
-  - psutil
   - pip:
     - --editable ../Cogent3/[dev]
     - --editable .
+    - sphinx-gallery
+    - sphinx_bootstrap_theme

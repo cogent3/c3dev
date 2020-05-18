@@ -77,7 +77,7 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
     if (cogent3_path / ".hg").exists():
         # precommit hooks for cogent3 hgrc
         cogent3 = {"hooks": {}}
-        cogent3["hooks"]["pre-push"] = "tox -e py37"
+        cogent3["hooks"]["pre-push"] = "tox -e py38"
         cogent3["hooks"]["precommit.black"] = "black tests/ src/"
         cogent3["hooks"]["precommit.isort"] = "isort -rc tests/ src/"
         cogent3["hooks"]["pre-push.bookmark"] = "hg bookmark -fr default develop"
@@ -88,7 +88,7 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter):
         # prepush hooks for c3dev git config
         cogent3_pre_push = cogent3_path / ".git/hooks/pre-push"
         f = open(cogent3_pre_push, "w")
-        f.writelines(["#!/bin/bash\n", "tox -e py37"])
+        f.writelines(["#!/bin/bash\n", "tox -e py38"])
         f.close()
         if not sys.platform == "win32":
             exec_command("chmod +x " + str(cogent3_pre_push.absolute()))
