@@ -1,4 +1,4 @@
-name: c3dev
+name: c38dev
 channels:
   - plotly
   - conda-forge
@@ -13,11 +13,11 @@ dependencies:
   - pip
   - plotly-orca
   - psutil
-  - python>=3.7
+  - python>=3.8
   - readline
   - scipy
   - pip:
-    - --editable ../Cogent3/[dev]
     - --editable .
+    - --editable ../Cogent3/[dev]
     - sphinx-gallery
     - sphinx_bootstrap_theme

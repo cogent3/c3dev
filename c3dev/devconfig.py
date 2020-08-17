@@ -50,7 +50,7 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter, skip_vc):
     cogent3_path = pathlib.Path(cogent3_dir).resolve()
     if not skip_jupyter:
         config_jupyter_plotly()
-        
+
     if not skip_vc:
         if (c3dev_path / ".hg").exists():
             # precommit hooks for c3dev hgrc
