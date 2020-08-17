@@ -46,10 +46,6 @@ class VersionUpdater(object):
             raise IOError("Could not locate tests/__init__.py")
         if not os.access(path.join(self.doc_directory, "conf.py"), os.R_OK):
             raise IOError("Could not locate doc/conf.py")
-        if not os.access(
-            path.join(self.includes_directory, "numerical_pyrex.pyx"), os.R_OK
-        ):
-            raise IOError("Cound not locate include/numerical_Cython.pyx")
 
     def _get_base_files(self):
         """Support method, provides relative locations for files in base dir"""
@@ -72,13 +68,11 @@ class VersionUpdater(object):
             for f in filenames:
                 rel_name = path.join(dirpath, f)
                 if f.endswith(".py"):
-                    yield (rel_name, "Python")
+                    yield rel_name, "Python"
                 elif f.endswith(".pyx"):
-                    yield (rel_name, "Cython")
+                    yield rel_name, "Cython"
                 elif f.endswith(".c"):
-                    yield (rel_name, "C")
-                else:
-                    pass
+                    yield rel_name, "C"
 
     def _get_doc_files(self):
         """Support method, provides relative locations for test files
@@ -221,9 +215,9 @@ class VersionUpdater(object):
             if self.verbose:
                 print("Reading %s" % filename)
 
-            if filetype is "Python":
+            if filetype == "Python":
                 lines, write_out = self._update_python_file(lines, filename)
-            elif filetype is "Properties":
+            elif filetype == "Properties":
                 lines, write_out = self._update_properties_file(lines, filename)
             else:
                 raise TypeError("Unknown base file type %s" % filetype)
@@ -252,16 +246,15 @@ class VersionUpdater(object):
 
     def update_include_files(self):
         """Updates version strings in include files"""
+
         for filename, filetype in self._get_include_files():
             lines = open(filename).readlines()
-            found_version_line = False
-
             if self.verbose:
                 print("Reading %s" % filename)
 
-            if filetype is "Cython":
+            if filetype == "Cython":
                 lines, write_out = self._update_cython_file(lines, filename)
-            elif filetype is "header":
+            elif filetype == "header":
                 lines, write_out = self._update_header_file(lines, filename)
             else:
                 raise TypeError("Unknown include file type %s" % filetype)
@@ -271,14 +264,13 @@ class VersionUpdater(object):
 
     def update_test_files(self):
         """Updates version strings in test files"""
+
         for filename, filetype in self._get_test_files():
             lines = open(filename).readlines()
-            found_version_line = False
-
             if self.verbose:
                 print("Reading %s" % filename)
 
-            if filetype is "Python":
+            if filetype == "Python":
                 lines, write_out = self._update_python_file(lines, filename)
             else:
                 raise TypeError("Unknown test file type %s" % filetype)
@@ -288,20 +280,19 @@ class VersionUpdater(object):
 
     def update_code_files(self):
         """Updates version strings in code files"""
+
         # if this annoying slow, could probably drop to bash or soemthing
         # for a search/replace
         for filename, filetype in self._get_code_files():
             lines = open(filename).readlines()
-            found_version_line = False
-
             if self.verbose:
                 print("Reading %s" % filename)
 
-            if filetype is "Python":
+            if filetype == "Python":
                 lines, write_out = self._update_python_file(lines, filename)
-            elif filetype is "Cython":
+            elif filetype == "Cython":
                 lines, write_out = self._update_cython_file(lines, filename)
-            elif filetype is "C":
+            elif filetype == "C":
                 lines, write_out = self._update_c_file(lines, filename)
             else:
                 raise TypeError("Unknown code file type %s" % filetype)
