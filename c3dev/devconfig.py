@@ -44,7 +44,7 @@ def write_config(path, settings):
 @click.option("-sj", "--skip_jupyter", is_flag=True, help="skip jupyter config")
 @click.option("-sv", "--skip_vc", is_flag=True, help="skip version control config")
 def main(c3dev_dir, cogent3_dir, skip_jupyter, skip_vc):
-    """installs jupyter plotly extensions, then configures mercurial.
+    """installs jupyter plotly extensions, then configures git/hg.
        Warning: overwrites .git pre-commit and pre-push hooks"""
     c3dev_path = pathlib.Path(c3dev_dir).resolve()
     cogent3_path = pathlib.Path(cogent3_dir).resolve()
@@ -92,7 +92,7 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter, skip_vc):
             f = open(cogent3_pre_push, "w")
             f.writelines(["#!/bin/bash\n", "tox -e py37"])
             f.close()
-            if not sys.platform == "win32":
+            if sys.platform != "win32":
                 exec_command("chmod +x " + str(cogent3_pre_push.absolute()))
 
             # precommit hooks for c3dev git config
@@ -102,7 +102,7 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter, skip_vc):
                 ["#!/bin/bash\n", "black tests/ src/\n", "isort -rc tests/ src/\n",]
             )
             f.close()
-            if not sys.platform == "win32":
+            if sys.platform != "win32":
                 exec_command("chmod +x " + str(cogent3_pre_commit.absolute()))
 
 
