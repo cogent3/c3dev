@@ -17,7 +17,7 @@ dependencies:
   - readline
   - scipy
   - pip:
+    - flit
     - --editable .
-    - --editable ../Cogent3/[dev]
     - sphinx-gallery
     - sphinx_bootstrap_theme
