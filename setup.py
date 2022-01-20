@@ -13,7 +13,7 @@ __email__ = "Gavin.Huttley@anu.edu.au"
 __status__ = "Alpha"
 
 # Check Python version, no point installing if unsupported version inplace
-if sys.version_info < (3, 6):
+if sys.version_info < (3, 7):
     py_version = ".".join([str(n) for n in sys.version_info])
     raise RuntimeError(
         "Python-3.6 or greater is required, Python-%s used." % py_version
@@ -38,7 +38,7 @@ setup(
     description=short_description,
     long_description=long_description,
     platforms=["any"],
-    license=[__license__],
+    license=__license__,
     keywords=[
         "biology",
         "genomics",
