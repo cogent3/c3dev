@@ -47,11 +47,6 @@ class VersionUpdater(object):
         if not os.access(path.join(self.doc_directory, "conf.py"), os.R_OK):
             raise IOError("Could not locate doc/conf.py")
 
-    def _get_base_files(self):
-        """Support method, provides relative locations for files in base dir"""
-        setup_file = path.join(self.rootdir, "setup.py")
-        return [(setup_file, "Python")]
-
     def _get_test_files(self):
         """Support method, provides relative locations for test files"""
         for dirpath, dirnames, filenames in os.walk(self.tests_directory):
@@ -203,27 +198,8 @@ class VersionUpdater(object):
         if self.verbose:
             print("Writing file %s" % filename)
 
-        updated_file = open(filename, "w")
-        updated_file.write("".join(lines))
-        updated_file.close()
-
-    def update_base_files(self):
-        """Updates version strings in files in base PyCogent directory"""
-        for filename, filetype in self._get_base_files():
-            lines = open(filename).readlines()
-
-            if self.verbose:
-                print("Reading %s" % filename)
-
-            if filetype == "Python":
-                lines, write_out = self._update_python_file(lines, filename)
-            elif filetype == "Properties":
-                lines, write_out = self._update_properties_file(lines, filename)
-            else:
-                raise TypeError("Unknown base file type %s" % filetype)
-
-            if write_out:
-                self._file_writer(lines, filename)
+        with open(filename, "w") as updated_file:
+            updated_file.write("".join(lines))
 
     def update_doc_files(self):
         """Updates version strings in documentation files
@@ -318,7 +294,7 @@ class VersionUpdater(object):
 @click.option("-mr", "--mock_run", is_flag=True)
 def main(rootdir, version, version_short, is_release, verbose, mock_run):
     """Support for updating version strings in the a source tree
-    
+
     All .py, .pyx, and .c files descending from rootdir will be updated
     """
     if not version:
@@ -338,7 +314,6 @@ def main(rootdir, version, version_short, is_release, verbose, mock_run):
     updater.update_test_files()
     updater.update_doc_files()
     updater.update_include_files()
-    updater.update_base_files()
 
 
 if __name__ == "__main__":
