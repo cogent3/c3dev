@@ -45,7 +45,7 @@ def write_config(path, settings):
 @click.option("-sv", "--skip_vc", is_flag=True, help="skip version control config")
 def main(c3dev_dir, cogent3_dir, skip_jupyter, skip_vc):
     """installs jupyter plotly extensions, then configures git/hg.
-       Warning: overwrites .git pre-commit and pre-push hooks"""
+    Warning: overwrites .git pre-commit and pre-push hooks"""
     c3dev_path = pathlib.Path(c3dev_dir).resolve()
     cogent3_path = pathlib.Path(cogent3_dir).resolve()
     if not skip_jupyter:
@@ -99,7 +99,11 @@ def main(c3dev_dir, cogent3_dir, skip_jupyter, skip_vc):
             cogent3_pre_commit = cogent3_path / ".git/hooks/pre-commit"
             f = open(cogent3_pre_commit, "w")
             f.writelines(
-                ["#!/bin/bash\n", "black tests/ src/\n", "isort tests/ src/\n",]
+                [
+                    "#!/bin/bash\n",
+                    "black tests/ src/\n",
+                    "isort tests/ src/\n",
+                ]
             )
             f.close()
             if sys.platform != "win32":

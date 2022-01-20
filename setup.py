@@ -57,7 +57,9 @@ setup(
         "Operating System :: OS Independent",
     ],
     packages=["c3dev"],
-    install_requires=["click",],
+    install_requires=[
+        "click",
+    ],
     entry_points={
         "console_scripts": [
             "cleanup=c3dev.cleanup:main",
