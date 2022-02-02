@@ -8,7 +8,7 @@ More details are on the [c3dev wiki](https://github.com/cogent3/c3dev/wiki/Insta
 
 ```bash
 $ cd path/to/repos/c3dev
-$ conda create -f c3dev_environment.yml
+$ conda env create -f c3dev_environment.yml
 ```
 will install the command line scripts into the active conda environment.
 
