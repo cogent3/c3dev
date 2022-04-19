@@ -31,7 +31,5 @@ followed by
 
 ```bash
 $ cd path/to/repos/cogent3
-$ flit install --deps all --pth-file --python `which python`
+$ flit install --deps all -s --python `which python`
 ```
-
-**NOTE:** I suggest using the `--pth-file` option over the previously recommended `-s`  (symlink) option because, as it turns out, IDEs (e.g. PyCharm, VS Code) treat the symlinked path as if they're different files.
