@@ -7,25 +7,6 @@ import click
 from .util import exec_command
 
 
-def config_jupyter_plotly():
-    if not sys.platform == "win32":
-        environ = "NODE_OPTIONS=--max-old-space-size=4096"
-    else:
-        environ = ""
-    installs = [
-        "@jupyter-widgets/jupyterlab-manager",
-        "plotlywidget",
-        "jupyterlab-plotly",
-        # "jupyterlab-chart-editor",
-    ]
-    for install in installs:
-        cmnd = f"{environ} jupyter labextension install {install}  --no-build"
-        r = exec_command(cmnd)
-    # then do install
-    cmnd = "jupyter lab build"
-    r = exec_command(cmnd)
-
-
 def write_config(path, settings):
     """execute black and isort on commit, run_tests on push"""
     config = configparser.ConfigParser()
@@ -41,15 +22,12 @@ def write_config(path, settings):
 @click.command()
 @click.argument("c3dev_dir", type=click.Path(exists=True))
 @click.argument("cogent3_dir", type=click.Path(exists=True))
-@click.option("-sj", "--skip_jupyter", is_flag=True, help="skip jupyter config")
 @click.option("-sv", "--skip_vc", is_flag=True, help="skip version control config")
-def main(c3dev_dir, cogent3_dir, skip_jupyter, skip_vc):
+def main(c3dev_dir, cogent3_dir, skip_vc):
     """installs jupyter plotly extensions, then configures git/hg.
     Warning: overwrites .git pre-commit and pre-push hooks"""
     c3dev_path = pathlib.Path(c3dev_dir).resolve()
     cogent3_path = pathlib.Path(cogent3_dir).resolve()
-    if not skip_jupyter:
-        config_jupyter_plotly()
 
     if not skip_vc:
         if (c3dev_path / ".hg").exists():

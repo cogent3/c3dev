@@ -64,7 +64,6 @@ setup(
         "console_scripts": [
             "cleanup=c3dev.cleanup:main",
             "update_version=c3dev.update_version:main",
-            "jlab_start=c3dev.jlab:main",
             "check_test_inclusion=c3dev.included_tests:main",
             "check_test_integrity=c3dev.integrity_tests:main",
             "move_merc=c3dev.relocate_mercurial:main",
