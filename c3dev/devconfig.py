@@ -33,7 +33,7 @@ def main(c3dev_dir, cogent3_dir, skip_vc):
         if (c3dev_path / ".hg").exists():
             # precommit hooks for c3dev hgrc
             hg_pyco3 = {"hooks": {}}
-            hg_pyco3["hooks"]["precommit.black"] = "black " + c3dev_path.name
+            hg_pyco3["hooks"]["precommit.black"] = f"black {c3dev_path.name}"
             hg_pyco3["hooks"]["precommit.isort"] = "isort " + c3dev_path.name
             pyco_path = c3dev_path / ".hg/hgrc"
             assert pyco_path.exists()
@@ -42,17 +42,17 @@ def main(c3dev_dir, cogent3_dir, skip_vc):
         if (c3dev_path / ".git").exists():
             # precommit hooks for c3dev git config
             pyco3_pre_commit = c3dev_path / ".git/hooks/pre-commit"
-            f = open(pyco3_pre_commit, "w")
-            f.writelines(
-                [
-                    "#!/bin/bash\n",
-                    "black " + c3dev_path.name + "\n",
-                    "isort " + c3dev_path.name,
-                ]
-            )
-            f.close()
-            if not sys.platform == "win32":
-                exec_command("chmod +x " + str(pyco3_pre_commit.absolute()))
+            with open(pyco3_pre_commit, "w") as f:
+                f.writelines(
+                    [
+                        "#!/bin/bash\n",
+                        f"black {c3dev_path.name}" + "\n",
+                        "isort " + c3dev_path.name,
+                    ]
+                )
+
+            if sys.platform != "win32":
+                exec_command(f"chmod +x {str(pyco3_pre_commit.absolute())}")
 
         if (cogent3_path / ".hg").exists():
             # precommit hooks for cogent3 hgrc
@@ -67,25 +67,25 @@ def main(c3dev_dir, cogent3_dir, skip_vc):
         if pathlib.Path(cogent3_path / ".git").exists():
             # prepush hooks for c3dev git config
             cogent3_pre_push = cogent3_path / ".git/hooks/pre-push"
-            f = open(cogent3_pre_push, "w")
-            f.writelines(["#!/bin/bash\n", "tox -e py38"])
-            f.close()
+            with open(cogent3_pre_push, "w") as f:
+                f.writelines(["#!/bin/bash\n", "nox"])
+
             if sys.platform != "win32":
-                exec_command("chmod +x " + str(cogent3_pre_push.absolute()))
+                exec_command(f"chmod +x {str(cogent3_pre_push.absolute())}")
 
             # precommit hooks for c3dev git config
             cogent3_pre_commit = cogent3_path / ".git/hooks/pre-commit"
-            f = open(cogent3_pre_commit, "w")
-            f.writelines(
-                [
-                    "#!/bin/bash\n",
-                    "black tests/ src/\n",
-                    "isort tests/ src/\n",
-                ]
-            )
-            f.close()
+            with open(cogent3_pre_commit, "w") as f:
+                f.writelines(
+                    [
+                        "#!/bin/bash\n",
+                        "black tests/ src/\n",
+                        "isort tests/ src/\n",
+                    ]
+                )
+
             if sys.platform != "win32":
-                exec_command("chmod +x " + str(cogent3_pre_commit.absolute()))
+                exec_command(f"chmod +x {str(cogent3_pre_commit.absolute())}")
 
 
 if __name__ == "__main__":
