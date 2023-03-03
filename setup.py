@@ -59,6 +59,7 @@ setup(
     packages=["c3dev"],
     install_requires=[
         "click",
+        "scriv",
     ],
     entry_points={
         "console_scripts": [
