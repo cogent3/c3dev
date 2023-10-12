@@ -7,7 +7,7 @@ dependencies:
   - openmpi
   - pip
   - psutil
-  - python>=3.10
+  - python=3.10
   - readline
   - scipy
   - pip:
