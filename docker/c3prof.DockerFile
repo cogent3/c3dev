@@ -14,15 +14,17 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+RUN git clone https://github.com/cogent3/cogent3.git /cogent3-repo
+
 # Set working directory
-WORKDIR /c3env/lib/python3.11/site-packages/cogent3
+WORKDIR /cogent3-repo
 
 # Create a Python virtual environment and activate it
 RUN python3.11 -m venv /c3env
 ENV PATH="/c3env/bin:$PATH"
 
 # Install cogent3 from GitHub
-RUN pip install "cogent3[dev]"
+RUN python -m pip install git+https://github.com/cogent3/cogent3.git@develop
 
 # Install pytest, pytest-profiling and other required Python packages
 RUN python -m pip install pytest pytest-profiling gprof2dot
