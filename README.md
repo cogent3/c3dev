@@ -2,7 +2,7 @@
 
 I assume you have cloned this repo (and the one for cogent3) to your local machine.
 
-More details are on the [c3dev wiki](https://github.com/cogent3/c3dev/wiki/Installing-Cogent3-for-development).
+More details are on the [c3dev wiki](https://github.com/cogent3/c3dev/wiki).
 
 ## If you use conda
 
